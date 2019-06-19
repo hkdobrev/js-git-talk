@@ -1,0 +1,17 @@
+
+reveal_path : "https://cdn.jsdelivr.net/npm/reveal.js@3.6.0"
+
+title: "Automating processes with JavaScript and Git"
+reveal_theme : "simple"
+
+custom_css : "deveal.css"
+
+content_files : [
+    "sections/intro.html",
+    "sections/slide1.html",
+    "sections/author.html",
+    "sections/slide2.html",
+    "sections/slide3.html",
+    "sections/slide4.html",
+    "sections/outro.html"
+]

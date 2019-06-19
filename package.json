@@ -1,0 +1,31 @@
+{
+  "name": "js-git-talk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Haralan Dobrev <hkdobrev@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@hkdobrev/run-if-changed": "^0.2.5",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "run-if-changed",
+      "post-checkout": "run-if-changed",
+      "post-merge": "run-if-changed",
+      "post-rewrite": "run-if-changed"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "run-if-changed": {
+    "yarn.lock": "yarn install --prefer-offline --pure-lockfile"
+  }
+}

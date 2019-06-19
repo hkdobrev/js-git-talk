@@ -1,0 +1,40 @@
+<section>
+    <section>
+        <h1>Git</h1>
+    </section>
+    <section>
+        <h2>Git hooks</h2>
+    </section>
+    <section>
+        <h2>Creating your own Git hooks</h2>
+    </section>
+    <section>
+        <pre><code class="hljs shell" data-trim data-noescape>
+        vim .git/hooks/pre-commit.sample
+        </code></pre>
+    </section>
+    <section>
+        <pre><code class="hljs shell" data-trim data-noescape>
+        vim <mark>.git</mark>/hooks/pre-commit.sample
+        </code></pre>
+    </section>
+    <section>
+        <pre><code class="hljs shell" data-trim data-noescape>
+        #!/bin/sh
+        #
+        # An example hook script to verify what is about to be committed.
+        # Called by "git commit" with no arguments.  The hook should
+        # exit with non-zero status after issuing an appropriate message if
+        # it wants to stop the commit.
+        #
+        # To enable this hook, rename this file to "pre-commit".
+
+        if git rev-parse --verify HEAD >/dev/null 2>&1
+        then
+            against=HEAD
+        else
+            # Initial commit: diff against an empty tree object
+            against=$(git hash-object -t tree /dev/null)
+        </code></pre>
+    </section>
+</section>

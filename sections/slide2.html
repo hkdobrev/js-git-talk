@@ -1,0 +1,41 @@
+<section>
+    <section>
+        <h1>Share&nbsp;your team's&nbsp;hooks</h1>
+    </section>
+    <section>
+        <pre><code class="shell" data-trim data-noescape>
+        git config core.hooksPath &lt;hooks-dir&gt;
+        </code></pre>
+        <pre><code class="shell" data-trim data-noescape>
+        ln -sf ../../&lt;hooks-dir&gt;/pre-commit .git/hooks/pre-commit
+        </code></pre>
+    </section>
+    <section>
+        <h1><a href="https://github.com/typicode/husky">Husky</a></h1>
+        <h3>🐶 Git hooks made easy</h3>
+    </section>
+    <section>
+        <pre><code class="shell" data-trim data-noescape>
+        package.json
+        </code></pre>
+        <pre><code class="json" data-trim data-noescape>
+        {
+          "husky": {
+            "hooks": {
+              "pre-commit": "yarn test",
+              "pre-push": "yarn test",
+            }
+          }
+        }
+        </code></pre>
+    </section>
+    <section>
+        <h3>Husky makes your hooks:</h3>
+        <br>
+        <ul>
+            <li>Documented</li>
+            <li>Discoverable</li>
+            <li>Automatically installed</li>
+        </ul>
+    </section>
+</section>

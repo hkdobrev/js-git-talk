@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    
+    <title>Automating processes with JavaScript and Git</title>
+    
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/css/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/css/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="deveal.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/css/print/pdf.css' : 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+
+<section class="center">
+    <img src="graphics/devbg-intro.png">
+</section>
+
+<section>
+    <section>
+        <h1>Git</h1>
+    </section>
+    <section>
+        <h2>Git hooks</h2>
+    </section>
+    <section>
+        <h2>Creating your own Git hooks</h2>
+    </section>
+    <section>
+        <pre><code class="hljs shell" data-trim data-noescape>
+        vim .git/hooks/pre-commit.sample
+        </code></pre>
+    </section>
+    <section>
+        <pre><code class="hljs shell" data-trim data-noescape>
+        vim <mark>.git</mark>/hooks/pre-commit.sample
+        </code></pre>
+    </section>
+    <section>
+        <pre><code class="hljs shell" data-trim data-noescape>
+        #!/bin/sh
+        #
+        # An example hook script to verify what is about to be committed.
+        # Called by "git commit" with no arguments.  The hook should
+        # exit with non-zero status after issuing an appropriate message if
+        # it wants to stop the commit.
+        #
+        # To enable this hook, rename this file to "pre-commit".
+
+        if git rev-parse --verify HEAD >/dev/null 2>&1
+        then
+            against=HEAD
+        else
+            # Initial commit: diff against an empty tree object
+            against=$(git hash-object -t tree /dev/null)
+        </code></pre>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h1>Haralan&nbsp;Dobrev</h1>
+    </section>
+    <section>
+        <h2>Haralan Dobrev</h2>
+        <section>
+            <p><a href="https://twitter.com/hkdobrev">@hkdobrev</a></p>
+            <p class="fragment"><a href="https://hkdobrev.com">hkdobrev.com</a></p>
+            <p class="fragment">Git, JS, PHP, DevOps</p>
+            <p class="fragment">CTO @ Clippings</p>
+        </section>
+    </section>
+</section>
+<section data-background-image="graphics/clippings.png" data-background-size="contain"></section>
+
+<section>
+    <section>
+        <h1>Share&nbsp;your team's&nbsp;hooks</h1>
+    </section>
+    <section>
+        <pre><code class="shell" data-trim data-noescape>
+        git config core.hooksPath &lt;hooks-dir&gt;
+        </code></pre>
+        <pre><code class="shell" data-trim data-noescape>
+        ln -sf ../../&lt;hooks-dir&gt;/pre-commit .git/hooks/pre-commit
+        </code></pre>
+    </section>
+    <section>
+        <h1><a href="https://github.com/typicode/husky">Husky</a></h1>
+        <h3>🐶 Git hooks made easy</h3>
+    </section>
+    <section>
+        <pre><code class="shell" data-trim data-noescape>
+        package.json
+        </code></pre>
+        <pre><code class="json" data-trim data-noescape>
+        {
+          "husky": {
+            "hooks": {
+              "pre-commit": "yarn test",
+              "pre-push": "yarn test",
+            }
+          }
+        }
+        </code></pre>
+    </section>
+    <section>
+        <h3>Husky makes your hooks:</h3>
+        <br>
+        <ul>
+            <li>Documented</li>
+            <li>Discoverable</li>
+            <li>Automatically installed</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <h2>What can hooks be useful&nbsp;for&nbsp;in a team?</h2>
+    <ul>
+        <li class="fragment">Validate branch names</li>
+        <li class="fragment">Commit message templating & checks</li>
+        <li class="fragment">Lint commit contents</li>
+        <li class="fragment">Auto fix commit contents</li>
+        <li class="fragment">Run tests</li>
+        <li class="fragment">Install new dependencies</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Automatically format code&nbsp;on commit</h2>
+    <section>
+        <p class="fragment"><code>pre-commit</code> &amp; <a href="https://github.com/okonet/lint-staged">lint-staged</a></p>
+    </section>
+</section>
+<section>
+    <h2>Run command if file changed after pull/checkout</h2>
+    <section>
+        <p class="fragment"><code>post-checkout</code> &amp; <a href="https://github.com/hkdobrev/run-if-changed">run-if-changed</a></p>
+    </section>
+</section>
+<section class="center">
+    <h2>Q&A</h2>
+</section>
+
+<section data-background-image="graphics/devbg-next-talk-bg.png">
+    <section>
+        <h2 style="color: white !important;">Thanks!</h2>
+        <h4><a style="color: white !important;" href="https://twitter.com/hkdobrev">@hkdobrev</a></h4>
+        <h4><a style="color: white !important;" href="https://hkdobrev.com">hkdobrev.com</a></h4>
+        <br>
+        <h4 style="color: white !important; font-weight: normal !important;">Следващо събитие:</h4>
+        <h3 style="color: white !important;">Creating lightweight JS Apps w/ Web Components and lit-html</h3>
+    </section>
+</section>
+
+
+
+      </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/lib/js/head.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/js/reveal.js"></script>
+
+    <script>
+
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        slideNumber: false,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/plugin/search/search.js', async: true },
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://cdn.jsdelivr.net/npm/reveal.js@3.6.0/plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
